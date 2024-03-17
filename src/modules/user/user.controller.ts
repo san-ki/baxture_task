@@ -33,8 +33,8 @@ export class UserController {
   // }
 
   @Get()
-  getAll(): User[] {
-    return this.userService.getAll();
+  async getAll(): Promise<User[]> {
+    return await this.userService.getAll();
   }
 
   @Get('/:userid')
@@ -42,7 +42,7 @@ export class UserController {
   async getOne(@Param() id: IdTo): Promise<User | string> {
     console.log(id.userid);
     if (!id.userid) throw new BadRequestException('userid param is required');
-    let user = this.userService.getOne(id.userid);
+    let user = await this.userService.getOne(id.userid);
     console.log(user);
 
     if (user == USER_NOT_FOUND)
@@ -54,7 +54,7 @@ export class UserController {
   @UsePipes(new ValidationPipe())
   async post(@Body() user: AddUserTo): Promise<string> {
     console.log(user, 'here');
-    let status = this.userService.create(user);
+    let status = await this.userService.create(user);
     if (status == USER_ALREADY_EXIST)
       throw new ConflictException('user already exist');
     return status;
@@ -64,7 +64,7 @@ export class UserController {
   @UsePipes(new ValidationPipe())
   async put(@Body() user: UserDto): Promise<string> {
     console.log(user, 'here');
-    let status = this.userService.put(user);
+    let status = await this.userService.put(user);
     if (status == USER_NOT_FOUND)
       throw new UnprocessableEntityException('user not found');
     if (status != SUCCESS) throw new InternalServerErrorException();
@@ -74,8 +74,8 @@ export class UserController {
   @Delete('/:userid')
   @UsePipes(new ValidationPipe())
   async deleteUser(@Param() id: IdTo): Promise<string> {
-    console.log(id);
-    let status = this.userService.delete(id.userid);
+    let status = await this.userService.delete(id.userid);
+    console.log(status);
     if (status == USER_NOT_FOUND)
       throw new UnprocessableEntityException('user not found');
     if (status != SUCCESS) throw new InternalServerErrorException();

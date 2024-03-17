@@ -1,0 +1,4 @@
+exports.SUCCESS = 'SUCCESS';
+exports.FAIL = 'FAIL';
+exports.USER_ALREADY_EXIST = 'USER_ALREADY_EXIST';
+exports.USER_NOT_FOUND = 'USER_NOT_FOUND';
