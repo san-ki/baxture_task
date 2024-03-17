@@ -4,13 +4,6 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const args = process.argv.slice(2);
-if (!args.length) {
-  console.log('Please provide port count');
-  process.exit();
-}
-const portCount = args[0];
-
 const numCPUs = os.availableParallelism();
 
 let PORT = parseInt(process.env.PORT),

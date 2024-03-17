@@ -12,6 +12,7 @@
     "start:dev": "nest start --watch",
     "start:check": "ts-node-dev src/main.ts",
     "start:debug": "nest start --debug --watch",
+    "start:multi": "node ./loadBalancer.js",
     "start:prod": "nest build && node dist/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
