@@ -24,3 +24,9 @@ $ npm run start:prod
 $ npm run test
 
 ```
+
+## issues
+
+### Db consistency
+
+working on it
