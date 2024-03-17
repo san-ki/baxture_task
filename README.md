@@ -15,6 +15,9 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+
+# multi mode
+$ npm run start:multi
 ```
 
 ## Test
