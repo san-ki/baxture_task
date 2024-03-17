@@ -14,12 +14,12 @@ import {
   UsePipes,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from 'src/db/db_types';
+import { User } from '../../db/db_types';
 import {
   SUCCESS,
   USER_ALREADY_EXIST,
   USER_NOT_FOUND,
-} from 'src/utils/constants';
+} from '../../utils/constants';
 import { ValidationPipe } from '../../shared/pipes/validation/validation.pipe';
 import { UserDto, IdTo, AddUserTo } from './user.dto';
 

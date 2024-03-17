@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { UUID } from 'crypto';
-import db from 'src/db/Db';
-import { User } from 'src/db/db_types';
-import { SUCCESS } from 'src/utils/constants';
+import db from '../../db/Db';
+import { User } from '../../db/db_types';
+import { SUCCESS } from '../../utils/constants';
 import { IdTo } from './user.dto';
 
 @Injectable()
