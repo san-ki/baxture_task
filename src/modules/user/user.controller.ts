@@ -15,7 +15,6 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from 'src/db/db_types';
-import { UUID } from 'crypto';
 import {
   SUCCESS,
   USER_ALREADY_EXIST,
@@ -41,13 +40,13 @@ export class UserController {
   @Get('/:userid')
   @UsePipes(new ValidationPipe())
   async getOne(@Param() id: IdTo): Promise<User | string> {
-    console.log(id.id);
-    if (!id.id) throw new BadRequestException('userid param is required');
-    let user = this.userService.getOne(id.id);
+    console.log(id.userid);
+    if (!id.userid) throw new BadRequestException('userid param is required');
+    let user = this.userService.getOne(id.userid);
     console.log(user);
 
     if (user == USER_NOT_FOUND)
-      throw new NotFoundException(`User with ${id} not found`);
+      throw new NotFoundException(`User with ${id.userid} not found`);
     return user;
   }
 
@@ -76,7 +75,7 @@ export class UserController {
   @UsePipes(new ValidationPipe())
   async deleteUser(@Param() id: IdTo): Promise<string> {
     console.log(id);
-    let status = this.userService.delete(id.id);
+    let status = this.userService.delete(id.userid);
     if (status == USER_NOT_FOUND)
       throw new UnprocessableEntityException('user not found');
     if (status != SUCCESS) throw new InternalServerErrorException();

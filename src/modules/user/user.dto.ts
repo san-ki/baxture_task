@@ -30,5 +30,5 @@ export class AddUserTo {
 
 export class IdTo {
   @IsUUID()
-  id: UUID;
+  userid: UUID;
 }
