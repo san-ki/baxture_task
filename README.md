@@ -32,4 +32,7 @@ $ npm run test
 
 ### Db consistency
 
-working on it
+code is on branch dbChanges (not merged in master), there's a issue in db server port.
+To check db consistency please checkout to "dbChanges"
+cannot access DB_PORT from .env file.
+db server is running on port 8000, please change it from package.json if you want
