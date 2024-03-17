@@ -27,7 +27,7 @@ export class UserService {
     return resp;
   }
 
-  getOne(id: UUID): User {
+  getOne(id: UUID): User | string {
     let resp = this.DB.getOne(id);
     return resp;
   }

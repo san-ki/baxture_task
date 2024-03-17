@@ -66,7 +66,7 @@ class db {
     return SUCCESS;
   };
 
-  getOne = (id: UUID): User => {
+  getOne = (id: UUID): User | string => {
     let user: User = null;
     try {
       if (!this.users[id]) throw new Error(USER_NOT_FOUND);
