@@ -21,7 +21,8 @@ import {
   USER_ALREADY_EXIST,
   USER_NOT_FOUND,
 } from 'src/utils/constants';
-import { ValidationPipe } from 'src/shared/pipes/validation/validation.pipe';
+import { ValidationPipe } from '../../shared/pipes/validation/validation.pipe';
+import { UserDto, IdTo, AddUserTo } from './user.dto';
 
 @Controller('users')
 export class UserController {
@@ -37,12 +38,12 @@ export class UserController {
     return this.userService.getAll();
   }
 
-  @UsePipes(new ValidationPipe())
   @Get('/:userid')
-  getOne(@Param('userid') id: UUID): User | string {
-    console.log(id);
-    if (!id) throw new BadRequestException('userid param is required');
-    let user = this.userService.getOne(id);
+  @UsePipes(new ValidationPipe())
+  async getOne(@Param() id: IdTo): Promise<User | string> {
+    console.log(id.id);
+    if (!id.id) throw new BadRequestException('userid param is required');
+    let user = this.userService.getOne(id.id);
     console.log(user);
 
     if (user == USER_NOT_FOUND)
@@ -50,9 +51,9 @@ export class UserController {
     return user;
   }
 
-  @UsePipes(new ValidationPipe())
   @Post()
-  post(@Body() user: User): string {
+  @UsePipes(new ValidationPipe())
+  async post(@Body() user: AddUserTo): Promise<string> {
     console.log(user, 'here');
     let status = this.userService.create(user);
     if (status == USER_ALREADY_EXIST)
@@ -60,9 +61,9 @@ export class UserController {
     return status;
   }
 
-  @UsePipes(new ValidationPipe())
   @Put()
-  put(@Body() user: User): string {
+  @UsePipes(new ValidationPipe())
+  async put(@Body() user: UserDto): Promise<string> {
     console.log(user, 'here');
     let status = this.userService.put(user);
     if (status == USER_NOT_FOUND)
@@ -71,11 +72,11 @@ export class UserController {
     return status;
   }
 
-  @UsePipes(new ValidationPipe())
   @Delete('/:userid')
-  deleteUser(@Param('userid') id: UUID): string {
+  @UsePipes(new ValidationPipe())
+  async deleteUser(@Param() id: IdTo): Promise<string> {
     console.log(id);
-    let status = this.userService.delete(id);
+    let status = this.userService.delete(id.id);
     if (status == USER_NOT_FOUND)
       throw new UnprocessableEntityException('user not found');
     if (status != SUCCESS) throw new InternalServerErrorException();

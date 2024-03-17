@@ -3,6 +3,7 @@ import { UUID } from 'crypto';
 import db from 'src/db/Db';
 import { User } from 'src/db/db_types';
 import { SUCCESS } from 'src/utils/constants';
+import { IdTo } from './user.dto';
 
 @Injectable()
 export class UserService {
