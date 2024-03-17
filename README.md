@@ -27,3 +27,9 @@ $ npm run start:multi
 $ npm run test
 
 ```
+
+## issues
+
+### Db consistency
+
+working on it
